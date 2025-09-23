@@ -2,10 +2,10 @@ package org.example;
 
 import java.util.Optional;
 
-public interface IConcurrentSortedTree<K,V>  {
+public interface IConcurrentSortedTree {
 
-    Optional<V> get(K key);
+    Optional<byte[]> get(byte[] key);
 
-    Optional<V> put(K key, V value);
+    Optional<byte[]> put(byte[] key, byte[] value);
 
 }
