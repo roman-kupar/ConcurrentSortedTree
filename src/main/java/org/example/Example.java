@@ -9,7 +9,7 @@ import java.util.concurrent.*;
 
 import static org.example.util.Utf8.bytesOf;
 
-public class Main {
+public class Example {
     public static void main(String[] args) {
 
         /* Real-life example : YouTrack Issues DB */
