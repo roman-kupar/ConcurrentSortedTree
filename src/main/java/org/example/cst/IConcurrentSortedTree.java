@@ -1,4 +1,4 @@
-package org.example;
+package org.example.cst;
 
 import java.util.Optional;
 

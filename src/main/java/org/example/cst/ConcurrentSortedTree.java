@@ -1,10 +1,8 @@
-package org.example;
+package org.example.cst;
 
 import java.util.Comparator;
-import java.util.NavigableMap;
 import java.util.Optional;
 import java.util.TreeMap;
-import java.util.concurrent.ConcurrentNavigableMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +46,9 @@ public class ConcurrentSortedTree implements IConcurrentSortedTree {
 
         try {
             byte[] oldValue = map.put(keyCopy, valueCopy);
+
             return safeCopy(oldValue);
+
         } finally {
             lock.writeLock().unlock();
         }
