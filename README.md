@@ -18,6 +18,7 @@ This repository includes:
 - ✅ Demo application (`Example.java`) that simulates a small issue tracker using implemented data structure and validates concurrency.
 - ✅ Optional REST Controller (`DBserver.java`) using Spring Boot for showcasing API of a database.
 - ✅ JUnit tests for correctness and concurrency.
+- ✅ Benchmarks for data structure performance.
 
 ---
 
@@ -36,6 +37,17 @@ The implementation uses **`TreeMap`** with a **custom byte-array comparator** an
 
 - **Defensive Copying**  
   Keys and values are **copied on insert** and **copied on retrieval**, preventing external mutation and ensuring thread safety.
+
+---
+## 🔍 Comparison with Alternatives
+
+- **ConcurrentHashMap** offers excellent concurrency but does not preserve sorted order, making it unsuitable for a sorted tree.
+- **Collections.synchronizedSortedMap(TreeMap)** → Provides thread-safety but relies on a single coarse lock, blocking all readers and writers and limiting scalability.
+- **ConcurrentSkipListMap** is both concurrent and sorted, but comes with higher memory overhead and implementation complexity. My goal was a simpler, more transparent solution.
+- **Copy-on-Write structures** (e.g., CopyOnWriteArrayList) → Good for read-heavy workloads but inefficient for frequent writes and lack natural key–value semantics.
+- **Custom balanced trees** (AVL, B-Tree with locks) is possible but overly complex for the scope of this task and error-prone to implement correctly.
+
+👉 Given these trade-offs, TreeMap + ReentrantReadWriteLock strikes the best balance between simplicity, correctness, and concurrent performance for this assignment.
 
 ---
 

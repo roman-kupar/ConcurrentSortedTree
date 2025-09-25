@@ -7,7 +7,7 @@ import org.example.util.Utf8;
 import java.util.Optional;
 
 public class TreeBenchmark {
-    private static void benchmark(int size) {
+    public static void benchmark(int size) {
         IConcurrentSortedTree tree = new ConcurrentSortedTree();
         String prefix = "key";
         String value = "value";
@@ -16,18 +16,14 @@ public class TreeBenchmark {
             tree.put(Utf8.bytesOf(prefix + i), Utf8.bytesOf(value + i));
         }
         long endPut = System.nanoTime();
-        System.out.printf("Put %d elements: %.2f ms\n", size, (endPut - startPut) / 1_000_000.0);
+        System.out.printf("CST Put %d elements: %.2f ms\n", size, (endPut - startPut) / 1_000_000.0);
 
         long startGet = System.nanoTime();
-        int found = 0;
         for (int i = 0; i < size; i++) {
             Optional<byte[]> result = tree.get(Utf8.bytesOf(prefix + i));
-            if (result.isPresent() && Utf8.stringOf(result.get()).equals(value + i)) {
-                found++;
-            }
         }
         long endGet = System.nanoTime();
-        System.out.printf("Get %d elements: %.2f ms (found: %d)\n", size, (endGet - startGet) / 1_000_000.0, found);
+        System.out.printf("CST Get %d elements: %.2f ms \n", size, (endGet - startGet) / 1_000_000.0);
     }
 
     public static void main(String[] args) {
