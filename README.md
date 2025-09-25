@@ -16,7 +16,7 @@ This is my solution to Jetbrains YouTrackDB development internship project. It s
 **ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory key–value store.
 
 - **Key/Value Type:** `byte[]`
-- **API Operations:**
+- **Operations:**
   - `get(byte[])` → Retrieve value by key.
   - `put(byte[], byte[])` → Insert/update value by key; returns previous value if replaced.
 
