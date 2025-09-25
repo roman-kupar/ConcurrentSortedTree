@@ -1,61 +1,67 @@
-# ConcurrentSortedTree Project
+#  CST - ConcurrentSortedTree
 
-## Overview
-ConcurrentSortedTree is a Java-based project implementing a thread-safe, sorted tree data structure. It provides efficient concurrent operations for insertion and retrieval, and is designed for use in high-performance applications. The project also includes RESTful API endpoints and basic database integration for demonstration purposes.
 
-## Features
-- **ConcurrentSortedTree**: A custom implementation of a concurrent sorted tree supporting thread-safe put/get operations.
-- **REST API**: Exposes endpoints for database-like operations via Spring Boot (if enabled).
-- **Utility Classes**: Includes helper classes such as Utf8 for encoding/decoding.
-- **Unit Tests**: Comprehensive JUnit tests for correctness and concurrency.
+---
 
-## Technologies Used
-- Java 17
-- Gradle 
-- JUnit 
-- Spring Boot (optional, for REST API)
+## 📖 Overview
 
-## Setup Instructions
-1. **Clone the repository**
+**ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory key–value store.
+
+- Keys and values are stored as `byte[]`.
+- Supported operations are:
+  - `get(byte[])` → retrieve a value if present.
+  - `put(byte[], byte[])` → insert or update and return the previous value if it existed.
+
+This repository includes:
+
+- ✅ Core implementation of the tree in cst package.
+- ✅ Demo application (`Example.java`) that simulates a small issue tracker using implemented data structure and validates concurrency.
+- ✅ Optional REST Controller (`DBserver.java`) using Spring Boot for showcasing API of a database.
+- ✅ JUnit tests for correctness and concurrency.
+
+---
+
+## 🧩 Why this data structure?
+
+The implementation uses **`TreeMap`** with a **custom byte-array comparator** and a **`ReentrantReadWriteLock`**.
+
+- **TreeMap**  
+  Provides a **sorted structure** with `O(log n)` complexity for `get` and `put`, based on a red–black tree.
+
+- **Custom Comparator**  
+  Java arrays are compared by reference by default. A **lexicographic unsigned comparator** (`a[i] & 0xFF`) ensures correct byte-wise ordering.
+
+- **ReentrantReadWriteLock**  
+  Multiple readers (`get`) can work concurrently, while writers (`put`) acquire the write lock exclusively. This yields better concurrency than coarse `synchronized` blocks.
+
+- **Defensive Copying**  
+  Keys and values are **copied on insert** and **copied on retrieval**, preventing external mutation and ensuring thread safety.
+
+---
+
+## ✨ Features
+
+- 🔒 **Thread-safe** concurrent access.
+- ⚡ **Sorted** storage using a red–black tree.
+- 🎯 **Minimal API surface** (`get`, `put`).
+- 🧪 **Unit + concurrency tests** included.
+- 🌐 **Optional REST API** with Spring Boot.
+- 🛠 **Utility helpers** (e.g., `Utf8` conversions).
+
+---
+
+## 🛠 Technologies
+
+- ☕ **Java 17**
+- 🛠 **Gradle**
+- ✅ **JUnit**
+- 🚀 **Spring Boot** (optional, REST API)
+
+---
+
+## ⚙️ Setup
+
+1. **Clone**
    ```sh
    git clone <repo-url>
    cd ConcurrentSortedTree
-   ```
-2. **Build the project**
-   ```sh
-   ./gradlew build
-   ```
-3. **Run the application**
-   - To run the main class:
-     ```sh
-     ./gradlew run
-     ```
-   - To start the REST API (if Spring Boot is configured):
-     ```sh
-     ./gradlew bootRun
-     ```
-
-## Usage
-- **ConcurrentSortedTree**
-  - Instantiate and use the tree in your Java code:
-    ```java
-    IConcurrentSortedTree tree = new ConcurrentSortedTree();
-    tree.put(Utf8.bytesOf("key"), Utf8.bytesOf("value"));
-    Optional<byte[]> value = tree.get(Utf8.bytesOf("key"));
-    ```
-- **REST API**
-  - Access endpoints via HTTP requests (see `DatabaseController.java` for details).
-
-## Testing
-Run all unit tests with:
-```sh
-./gradlew test
-```
-Test reports are available in `build/reports/tests/test/index.html`.
-
-## Contribution Guidelines
-Feel free to fork the repository and submit pull requests. Please ensure all new code is covered by unit tests.
-
-## License
-This project is licensed under the MIT License. See `LICENSE` for details.
-
