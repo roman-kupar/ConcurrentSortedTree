@@ -1,5 +1,4 @@
-#  CST - ConcurrentSortedTree
-
+# 🌳 CST - ConcurrentSortedTree
 
 ---
 
@@ -7,73 +6,108 @@
 
 **ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory key–value store.
 
-- Keys and values are stored as `byte[]`.
-- Supported operations are:
-  - `get(byte[])` → retrieve a value if present.
-  - `put(byte[], byte[])` → insert or update and return the previous value if it existed.
+- **Key/Value Type:** `byte[]`
+- **API Operations:**
+  - `get(byte[])` → Retrieve value by key.
+  - `put(byte[], byte[])` → Insert/update value by key; returns previous value if replaced.
 
-This repository includes:
+**This repository includes:**
 
-- ✅ Core implementation of the tree in cst package.
-- ✅ Demo application (`Example.java`) that simulates a small issue tracker using implemented data structure and validates concurrency.
-- ✅ Optional REST Controller (`DBserver.java`) using Spring Boot for showcasing API of a database.
-- ✅ JUnit tests for correctness and concurrency.
-- ✅ Benchmarks for data structure performance.
+- ✅ Core implementation of the tree in the `cst` package.
+- ✅ **Demo application:** `Example.java` simulates an issue tracker and validates concurrency.
+- ✅ **Optional REST Controller:** `DBserver.java` (Spring Boot) exposes a simple API for the database.
+- ✅ **JUnit tests:** Thorough correctness and concurrency validation.
+- ✅ **Benchmarks:** Performance measurement utilities.
+
+---
+
+## 🧩 Why This Data Structure?
+
+The implementation uses **`TreeMap`** with a custom byte-array comparator and a **`ReentrantReadWriteLock`**.
+
+### TreeMap
+- Provides **sorted structure** with `O(log n)` complexity for `get`/`put`, based on red–black tree.
+
+### Custom Comparator
+- Java arrays are compared by reference by default.
+- Lexicographic, **unsigned comparator** (`a[i] & 0xFF`) ensures correct byte-wise ordering.
+
+### ReentrantReadWriteLock
+- Multiple readers (`get`) work concurrently.
+- Writers (`put`) acquire the write lock exclusively.
+- **Improved concurrency** over coarse `synchronized` blocks.
+
+### Defensive Copying
+- Keys/values are **copied on insert/retrieval**.
+- Prevents external mutation, ensuring thread safety.
 
 ---
 
-## 🧩 Why this data structure?
+## 🔍 Comparison With Alternatives
 
-The implementation uses **`TreeMap`** with a **custom byte-array comparator** and a **`ReentrantReadWriteLock`**.
+| Alternative                                | Sorted | Concurrent | Notes                                                                                         |
+|---------------------------------------------|:------:|:----------:|-----------------------------------------------------------------------------------------------|
+| **ConcurrentHashMap**                       |   ❌   |    ✅      | Excellent concurrency, but unsorted.                                                          |
+| **Collections.synchronizedSortedMap**       |   ✅   |    ⚠️      | Coarse lock blocks all readers/writers; limited scalability.                                  |
+| **ConcurrentSkipListMap**                   |   ✅   |    ✅      | Good, but higher memory overhead and complexity.                                              |
+| **Copy-on-Write structures**                |   ❌   |    ⚠️      | Inefficient for frequent writes; not a natural fit for key–value semantics.                   |
+| **Custom balanced trees (AVL, B-Tree, etc)**|   ✅   |    ⚠️      | Possible, but complex and error-prone for scope of this task.                                 |
 
-- **TreeMap**  
-  Provides a **sorted structure** with `O(log n)` complexity for `get` and `put`, based on a red–black tree.
-
-- **Custom Comparator**  
-  Java arrays are compared by reference by default. A **lexicographic unsigned comparator** (`a[i] & 0xFF`) ensures correct byte-wise ordering.
-
-- **ReentrantReadWriteLock**  
-  Multiple readers (`get`) can work concurrently, while writers (`put`) acquire the write lock exclusively. This yields better concurrency than coarse `synchronized` blocks.
-
-- **Defensive Copying**  
-  Keys and values are **copied on insert** and **copied on retrieval**, preventing external mutation and ensuring thread safety.
-
----
-## 🔍 Comparison with Alternatives
-
-- **ConcurrentHashMap** offers excellent concurrency but does not preserve sorted order, making it unsuitable for a sorted tree.
-- **Collections.synchronizedSortedMap(TreeMap)** → Provides thread-safety but relies on a single coarse lock, blocking all readers and writers and limiting scalability.
-- **ConcurrentSkipListMap** is both concurrent and sorted, but comes with higher memory overhead and implementation complexity. My goal was a simpler, more transparent solution.
-- **Copy-on-Write structures** (e.g., CopyOnWriteArrayList) → Good for read-heavy workloads but inefficient for frequent writes and lack natural key–value semantics.
-- **Custom balanced trees** (AVL, B-Tree with locks) is possible but overly complex for the scope of this task and error-prone to implement correctly.
-
-👉 Given these trade-offs, TreeMap + ReentrantReadWriteLock strikes the best balance between simplicity, correctness, and concurrent performance for this assignment.
+**Conclusion:**  
+**TreeMap + ReentrantReadWriteLock** offers a pragmatic balance between simplicity, correctness, and performance.
 
 ---
 
 ## ✨ Features
 
-- 🔒 **Thread-safe** concurrent access.
-- ⚡ **Sorted** storage using a red–black tree.
-- 🎯 **Minimal API surface** (`get`, `put`).
-- 🧪 **Unit + concurrency tests** included.
-- 🌐 **Optional REST API** with Spring Boot.
-- 🛠 **Utility helpers** (e.g., `Utf8` conversions).
+- 🔒 **Thread-safe** concurrent access
+- ⚡ **Sorted** storage (red–black tree)
+- 🎯 **Minimal API**: `get`, `put`
+- 🧪 **Unit & concurrency tests**
+- 🌐 **Optional REST API** (Spring Boot)
+- 🛠 **Utility helpers** (`Utf8` conversions, etc.)
 
 ---
 
 ## 🛠 Technologies
 
-- ☕ **Java 17**
-- 🛠 **Gradle**
-- ✅ **JUnit**
-- 🚀 **Spring Boot** (optional, REST API)
+| Tech         | Use Case         |
+|--------------|------------------|
+| ☕ Java 17    | Core language    |
+| 🛠 Gradle     | Build tool       |
+| ✅ JUnit      | Testing          |
+| 🚀 Spring Boot| REST API (optional) |
 
 ---
 
 ## ⚙️ Setup
 
-1. **Clone**
+### 1. Clone the Repository
+
+```sh
+git clone <repo-url>
+cd ConcurrentSortedTree
+```
+
+---
+
+## 🚀 Quick Start
+
+1. **Build & Test**
    ```sh
-   git clone <repo-url>
-   cd ConcurrentSortedTree
+   ./gradlew build
+   ./gradlew test
+   ```
+
+2. **Run Demo Application**
+   ```sh
+   java -cp build/classes/java/main Example
+   ```
+
+3. **Start REST API (optional)**
+   ```sh
+   ./gradlew bootRun
+   ```
+
+---
+---
