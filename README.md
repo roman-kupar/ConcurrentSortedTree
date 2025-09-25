@@ -1,6 +1,15 @@
 # 🌳 CST - ConcurrentSortedTree
 
----
+![Java](https://img.shields.io/badge/Java-17-blue?logo=java)
+![Gradle](https://img.shields.io/badge/Gradle-Build-green?logo=gradle) 
+![JUnit](https://img.shields.io/badge/Tests-JUnit5-yellow?logo=JUnit5)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-Optional_API-brightgreen?logo=springboot)
+![Concurrency](https://img.shields.io/badge/Thread_Safe-ReentrantReadWriteLock-critical?logo=datadog)
+
+
+This is my solution to Jetbrains YouTrackDB development internship project. It shows the implementation of a sorted in-memory tree with put and get methods, where keys and values are byte arrays 
+
+> **Project Mentors**: Andrii Lomakin, Lev Sivashov
 
 ## 📖 Overview
 
