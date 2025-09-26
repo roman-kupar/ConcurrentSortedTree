@@ -117,21 +117,64 @@ cd ConcurrentSortedTree
 
 2. **Run Demo Application**
    ```sh
-   java -cp build/classes/java/main Example
+   java -cp build/classes/java/main org.example.Example
    ```
 
 3. **Run Benchmark**
    ```sh
-   java -cp build/classes/java/main TreeBenchmark
+   java -cp build/classes/java/main org.example.TreeBenchmark
+   ```
 
-4. **Run Comparement**
+4. **Run Comparison**
    ```sh
-   java -cp build/classes/java/main Comparement
+   java -cp build/classes/java/main org.example.Comparison
+   ```
 
-6. **Start REST API (optional)**
+5. **Start REST API (optional)**
+   ```sh
+   java -cp build/classes/java/main org.example.DBserver
+   ```
+   or (if using Spring Boot)
    ```sh
    ./gradlew bootRun
    ```
 
 ---
+
+## 📡 REST API Usage Examples
+
+### Using curl
+
+- **PUT (insert/update a value):**
+  ```sh
+  curl -X POST http://localhost:8080/db/put \
+    -H "Content-Type: application/json" \
+    -d '{"key":"myKey","value":"myValue"}'
+  ```
+  - Response: previous value for the key (or "null" if none)
+
+- **GET (retrieve a value):**
+  ```sh
+  curl http://localhost:8080/db/get/myKey
+  ```
+  - Response: value for the key (or 404 if not found)
+
+### Testing POST request in Postman
+1. Open Postman and create a new request.
+2. Set the method to **POST** and the URL to `http://localhost:8080/db/put`.
+3. Go to the **Body** tab, select **raw**, and choose **JSON** from the dropdown.
+4. Enter the following JSON:
+   ```json
+   {
+     "key": "myKey",
+     "value": "myValue"
+   }
+   ```
+5. Click **Send**. You should see the previous value (or "null") in the response.
+
+### Testing GET request in Postman
+1. Open Postman and create a new request.
+2. Set the method to **GET** and the URL to `http://localhost:8080/db/get/myKey` (replace `myKey` with your actual key).
+3. Click **Send**. You should see the value for the key in the response, or a 404 if not found)
+
 ---
