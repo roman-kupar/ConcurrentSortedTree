@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/db")
@@ -14,7 +15,9 @@ public class DatabaseController {
     private final IConcurrentSortedTree tree = new ConcurrentSortedTree();
 
     @PostMapping("/put")
-    public String put(@RequestParam String key, @RequestParam String value) {
+    public String put(@RequestBody Map<String, String> request) {
+        String key = request.get("key");
+        String value = request.get("value");
         var prev = tree.put(
                 key.getBytes(StandardCharsets.UTF_8),
                 value.getBytes(StandardCharsets.UTF_8)
