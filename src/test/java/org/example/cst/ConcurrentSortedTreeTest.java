@@ -10,9 +10,9 @@ import java.util.concurrent.Executors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConcurrentSortedTreeTest {
+public class ConcurrentSortedTreeTest {
     @Test
-    void testPutAndGetSingleThread() {
+    public void testPutAndGetSingleThread() {
         IConcurrentSortedTree tree = new ConcurrentSortedTree();
         String key = "testKey";
         String value = "testValue";
@@ -23,14 +23,14 @@ class ConcurrentSortedTreeTest {
     }
 
     @Test
-    void testGetMissingKey() {
+    public void testGetMissingKey() {
         IConcurrentSortedTree tree = new ConcurrentSortedTree();
         Optional<byte[]> result = tree.get(Utf8.bytesOf("missing"));
         assertFalse(result.isPresent());
     }
 
     @Test
-    void testConcurrentPutAndGet() throws InterruptedException {
+    public void testConcurrentPutAndGet() throws InterruptedException {
         IConcurrentSortedTree tree = new ConcurrentSortedTree();
         int threads = 10;
         int itemsPerThread = 100;
