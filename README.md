@@ -11,7 +11,7 @@ This is my solution to Jetbrains YouTrackDB development internship project. It s
 
 ## 🎥 Detailed project review
 
-### Watch a full review of the project commented by me. Please check timecodes.
+### Watch a **full review** of the project commented by me. Video is devided into **sections**, so please refer to **timecodes** if you are interested in any specific part. 
 
 [![Watch the video](https://img.youtube.com/vi/q0rP4Ri3zsI/maxresdefault.jpg)](https://www.youtube.com/watch?v=q0rP4Ri3zsI)
 
@@ -88,7 +88,7 @@ The implementation uses **`TreeMap`** with a custom byte-array comparator and a 
 
 | Tech         | Use Case         |
 |--------------|------------------|
-| ☕ Java 17    | Core language    |
+| ☕ Java 17+    | Core language    |
 | 🛠 Gradle     | Build tool       |
 | ✅ JUnit      | Testing          |
 | 🚀 Spring Boot| REST API (optional) |
