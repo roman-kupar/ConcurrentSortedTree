@@ -178,3 +178,21 @@ cd ConcurrentSortedTree
 3. Click **Send**. You should see the value for the key in the response, or a 404 if not found)
 
 ---
+
+## ⚡ CI/CD: GitHub Actions Workflow
+
+This project uses **GitHub Actions** for continuous integration. Every push and pull request to the `main` branch triggers the workflow, which automatically:
+
+- Checks out the code
+- Sets up Java 17
+- Caches Gradle dependencies for faster builds
+- Builds the project and runs all unit tests
+
+You can find the workflow file at `.github/workflows/gradle.yml`.
+
+**How it works:**
+- If any test fails, the build will fail and you’ll see details in the GitHub Actions tab of your repository.
+- Test reports are available in `build/reports/tests/test/index.html` after a local build.
+
+---
+
