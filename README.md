@@ -9,7 +9,13 @@
 
 This is my solution to Jetbrains YouTrackDB development internship project. It shows the implementation of a sorted in-memory tree with put and get methods, where keys and values are byte arrays 
 
-> **Project Mentors**: Andrii Lomakin, Lev Sivashov
+## 🎥 Detailed project review
+
+### Watch a full review of the project commented by me. Please check timecodes.
+
+[![Watch the video](https://img.youtube.com/vi/q0rP4Ri3zsI/maxresdefault.jpg)](https://www.youtube.com/watch?v=q0rP4Ri3zsI)
+
+---
 
 ## 📖 Overview
 
@@ -113,7 +119,15 @@ cd ConcurrentSortedTree
    java -cp build/classes/java/main Example
    ```
 
-3. **Start REST API (optional)**
+3. **Run Benchmark**
+   ```sh
+   java -cp build/classes/java/main TreeBenchmark
+
+4. **Run Comparement**
+   ```sh
+   java -cp build/classes/java/main Comparement
+
+6. **Start REST API (optional)**
    ```sh
    ./gradlew bootRun
    ```
