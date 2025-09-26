@@ -101,7 +101,7 @@ The implementation uses **`TreeMap`** with a custom byte-array comparator and a 
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/roman-kupar/ConcurrentSortedTree
+git clone https://github.com/roman-kupar/ConcurrentSortedTree.git
 cd ConcurrentSortedTree
 ```
 
