@@ -1,7 +1,7 @@
 package org.example.rest;
 
 import org.example.cst.ConcurrentSortedTree;
-import org.example.cst.IConcurrentSortedTree;
+import org.example.cst.ITree;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 @RequestMapping("/db")
 public class DatabaseController {
 
-    private final IConcurrentSortedTree tree = new ConcurrentSortedTree();
+    private final ConcurrentSortedTree tree = new ConcurrentSortedTree();
 
     @PostMapping("/put")
     public String put(@RequestBody Map<String, String> request) {

@@ -2,7 +2,7 @@ package org.example.cst;
 
 import java.util.Optional;
 
-public interface IConcurrentSortedTree {
+public interface ITree<K,V> {
 
     /**
      * Retrieves the value for the given key, if present.
@@ -10,7 +10,7 @@ public interface IConcurrentSortedTree {
      * @param key the key to search for.
      * @return an Optional with the value, or empty if not found.
      */
-    Optional<byte[]> get(byte[] key);
+    Optional<V> get(K key);
 
     /**
      * Adds or updates the value for the given key.
@@ -19,6 +19,6 @@ public interface IConcurrentSortedTree {
      * @param value the value to store.
      * @return an Optional with the previous value, or empty if none existed.
      */
-    Optional<byte[]> put(byte[] key, byte[] value);
+    Optional<V> put(K key, V value);
 
 }

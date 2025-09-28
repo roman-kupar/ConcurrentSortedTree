@@ -1,14 +1,14 @@
 package org.example;
 
 import org.example.cst.ConcurrentSortedTree;
-import org.example.cst.IConcurrentSortedTree;
+import org.example.cst.ITree;
 import org.example.util.Utf8;
 
 import java.util.Optional;
 
 public class TreeBenchmark {
     public static void benchmark(int size) {
-        IConcurrentSortedTree tree = new ConcurrentSortedTree();
+        ITree tree = new ConcurrentSortedTree();
         String prefix = "key";
         String value = "value";
         long startPut = System.nanoTime();

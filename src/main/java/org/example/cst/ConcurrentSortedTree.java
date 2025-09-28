@@ -2,19 +2,19 @@ package org.example.cst;
 
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.TreeMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import org.jetbrains.annotations.Nullable;
 
 import static java.util.Objects.requireNonNull;
 
-public class ConcurrentSortedTree implements IConcurrentSortedTree {
+public class ConcurrentSortedTree implements ITree<byte[], byte[]> {
 
-    private final TreeMap<byte[],byte[]> map;
+    private final RedBlackTree<byte[],byte[]> map;
     private final ReentrantReadWriteLock lock;
 
+
     public ConcurrentSortedTree() {
-        this.map = new TreeMap<>(LEXICOGRAPHIC);
+        this.map = new RedBlackTree<>(LEXICOGRAPHIC);
         this.lock = new ReentrantReadWriteLock();
     }
 
@@ -25,7 +25,7 @@ public class ConcurrentSortedTree implements IConcurrentSortedTree {
         lock.readLock().lock();
 
         try {
-            byte[] value = map.get(key);
+            byte[] value = map.get(key).orElse(null);
 
             return safeCopy(value);
 
@@ -45,7 +45,7 @@ public class ConcurrentSortedTree implements IConcurrentSortedTree {
         lock.writeLock().lock();
 
         try {
-            byte[] oldValue = map.put(keyCopy, valueCopy);
+            byte[] oldValue = map.put(keyCopy, valueCopy).orElse(null);
 
             return safeCopy(oldValue);
 
@@ -66,7 +66,6 @@ public class ConcurrentSortedTree implements IConcurrentSortedTree {
     private static Optional<byte[]> safeCopy(byte @Nullable [] arr) {
         return arr == null ? Optional.empty() : Optional.of(copyOf(arr));
     }
-
 
     private static byte[] copyOf(byte[] array) {
         byte[] copy = new byte[array.length];

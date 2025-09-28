@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.cst.ConcurrentSortedTree;
-import org.example.cst.IConcurrentSortedTree;
+import org.example.cst.ITree;
 import org.example.util.Utf8;
 
 import java.util.*;
@@ -15,7 +15,7 @@ public class Example {
         /* Real-life example : YouTrack Issues DB */
 
         /* Data structure */
-        IConcurrentSortedTree tree = new ConcurrentSortedTree();
+        ConcurrentSortedTree tree = new ConcurrentSortedTree();
 
         /* Add some YouTrack issues */
         tree.put(bytesOf("YT-101"), bytesOf("Login page is broken"));
@@ -38,7 +38,7 @@ public class Example {
 
         /* Update existing issue */
         tree.put(bytesOf("YT-101"), bytesOf("Login button does not respond"))
-                .ifPresent(oldValue -> System.out.println("Issue YT-101 updated from: " + Utf8.stringOf(oldValue) + "to 'Login button does not respond'"));
+                .ifPresent(oldValue -> System.out.println("Issue YT-101 updated from: " + Utf8.stringOf(oldValue) + " to 'Login button does not respond'"));
 
         /* Retrieve updated issue */
         tree.get(bytesOf("YT-101"))
