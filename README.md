@@ -12,7 +12,7 @@ This is my solution to JetBrains YouTrackDB development internship project. It f
 
 ## 📖 Overview
 
-**ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory key–value store.
+**ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory tree.
 
 - **Key/Value Type:** `byte[]`
 - **Operations:**
