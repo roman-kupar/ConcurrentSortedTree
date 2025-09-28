@@ -18,7 +18,7 @@ Checkout my youtube video explaining the whole project in a nutschell:
 
 ---
 
-## 🖼 UML Diagram
+## UML Diagram
 
 Here is a UML diagram illustrating the core classes and their relationships in the project.
 
@@ -26,7 +26,7 @@ Here is a UML diagram illustrating the core classes and their relationships in t
 
 ---
 
-## 📖 Overview
+## Overview
 
 **ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory tree.
 
@@ -37,11 +37,11 @@ Here is a UML diagram illustrating the core classes and their relationships in t
 
 **This repository includes:**
 
-- ✅ Core Red-Black Tree implementation in the `cst` package.
-- ✅ **Demo application:** `Example.java` simulates an issue tracker and validates concurrency.
-- ✅ **Optional REST Controller:** `DBserver.java` (Spring Boot) exposes a simple API for the database.
-- ✅ **JUnit tests:** Thorough correctness and concurrency validation.
-- ✅ **Benchmarks:** Performance measurement utilities.
+- Core Red-Black Tree implementation in the `cst` package.
+- **Demo application:** `Example.java` simulates an issue tracker and validates concurrency.
+- **Optional REST Controller:** `DBserver.java` (Spring Boot) exposes a simple API for the database.
+- **JUnit tests:** Thorough correctness and concurrency validation.
+- **Benchmarks:** Performance measurement utilities.
 
 ---
 
@@ -68,7 +68,7 @@ The core of this project is a **handwritten Red-Black Tree** wrapped around **'C
 
 ---
 
-## 🧑‍💻 Wrapper Pattern Design
+## Wrapper Pattern Design
 
 The **Wrapper (Decorator) pattern** is central to the architecture of this project. The core Red-Black Tree is implemented as a non-thread-safe, high-performance sorted data structure, focusing solely on correctness and efficiency. To enable safe concurrent access, the `ConcurrentSortedTree` class acts as a wrapper around the Red-Black Tree, layering in concurrency control without modifying the underlying tree logic.
 
@@ -147,7 +147,7 @@ cd ConcurrentSortedTree
 
 ---
 
-## 📡 REST API Usage Examples
+## REST API Usage Examples
 
 ### Using curl
 
@@ -185,7 +185,7 @@ cd ConcurrentSortedTree
 
 ---
 
-## ⚡ CI/CD: GitHub Actions Workflow
+## CI/CD: GitHub Actions Workflow
 
 This project uses **GitHub Actions** for continuous integration. Every push and pull request to the `main` branch triggers the workflow, which automatically:
 
