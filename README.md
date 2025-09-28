@@ -6,15 +6,15 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-Optional_API-brightgreen?logo=springboot)
 ![Concurrency](https://img.shields.io/badge/Thread_Safe-ReentrantReadWriteLock-critical?logo=datadog)
 
+This is my solution to JetBrains YouTrackDB development internship project. It features a custom implementation of a concurrent, sorted in-memory tree (Red-Black Tree) with put and get methods, where keys and values are byte arrays.
 
-This is my solution to Jetbrains YouTrackDB development internship project. It shows the implementation of a sorted in-memory tree with put and get methods, where keys and values are byte arrays 
+---
 
-## 🎥 Detailed project review
+## 🖼 UML Diagram
 
-### Watch a **full review** of the project commented by me. 
-Video is devided into **sections**, so please refer to **timecodes** if you are interested in any specific part. 
+Below is the UML diagram of the core classes (see `UML.png` in the repository):
 
-[![Watch the video](https://img.youtube.com/vi/q0rP4Ri3zsI/maxresdefault.jpg)](https://www.youtube.com/watch?v=q0rP4Ri3zsI)
+![UML Diagram](UML.png)
 
 ---
 
@@ -29,7 +29,7 @@ Video is devided into **sections**, so please refer to **timecodes** if you are 
 
 **This repository includes:**
 
-- ✅ Core implementation of the tree in the `cst` package.
+- ✅ Core Red-Black Tree implementation in the `cst` package.
 - ✅ **Demo application:** `Example.java` simulates an issue tracker and validates concurrency.
 - ✅ **Optional REST Controller:** `DBserver.java` (Spring Boot) exposes a simple API for the database.
 - ✅ **JUnit tests:** Thorough correctness and concurrency validation.
@@ -37,12 +37,13 @@ Video is devided into **sections**, so please refer to **timecodes** if you are 
 
 ---
 
-## 🧩 Why This Data Structure?
+## 🧩 Why a Red-Black Tree?
 
-The implementation uses **`TreeMap`** with a custom byte-array comparator and a **`ReentrantReadWriteLock`**.
+The core of this project is a **handwritten Red-Black Tree** wrapped around **'ConcurrentSortedTree'** supporting concurrent access via a `ReentrantReadWriteLock` .
 
-### TreeMap
-- Provides **sorted structure** with `O(log n)` complexity for `get`/`put`, based on red–black tree.
+### Red-Black Tree
+- Provides a **sorted structure** with `O(log n)` complexity for `get`/`put`.
+- Implemented from scratch for full control.
 
 ### Custom Comparator
 - Java arrays are compared by reference by default.
@@ -59,25 +60,10 @@ The implementation uses **`TreeMap`** with a custom byte-array comparator and a 
 
 ---
 
-## 🔍 Comparison With Alternatives
-
-| Alternative                                | Sorted | Concurrent | Notes                                                                                         |
-|---------------------------------------------|:------:|:----------:|-----------------------------------------------------------------------------------------------|
-| **ConcurrentHashMap**                       |   ❌   |    ✅      | Excellent concurrency, but unsorted.                                                          |
-| **Collections.synchronizedSortedMap**       |   ✅   |    ⚠️      | Coarse lock blocks all readers/writers; limited scalability.                                  |
-| **ConcurrentSkipListMap**                   |   ✅   |    ✅      | Good, but higher memory overhead and complexity.                                              |
-| **Copy-on-Write structures**                |   ❌   |    ⚠️      | Inefficient for frequent writes; not a natural fit for key–value semantics.                   |
-| **Custom balanced trees (AVL, B-Tree, etc)**|   ✅   |    ⚠️      | Possible, but complex and error-prone for scope of this task.                                 |
-
-**Conclusion:**  
-**TreeMap + ReentrantReadWriteLock** offers a pragmatic balance between simplicity, correctness, and performance.
-
----
-
 ## ✨ Features
 
 - 🔒 **Thread-safe** concurrent access
-- ⚡ **Sorted** storage (red–black tree)
+- ⚡ **Sorted** storage (custom Red-Black Tree)
 - 🎯 **Minimal API**: `get`, `put`
 - 🧪 **Unit & concurrency tests**
 - 🌐 **Optional REST API** (Spring Boot)
@@ -175,7 +161,7 @@ cd ConcurrentSortedTree
 ### Testing GET request in Postman
 1. Open Postman and create a new request.
 2. Set the method to **GET** and the URL to `http://localhost:8080/db/get/myKey` (replace `myKey` with your actual key).
-3. Click **Send**. You should see the value for the key in the response, or a 404 if not found)
+3. Click **Send**. You should see the value for the key in the response, or a 404 if not found.
 
 ---
 

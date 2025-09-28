@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class TreeBenchmark {
     public static void benchmark(int size) {
-        ITree tree = new ConcurrentSortedTree();
+        ITree<byte[],byte[]> tree = new ConcurrentSortedTree();
         String prefix = "key";
         String value = "value";
         long startPut = System.nanoTime();
