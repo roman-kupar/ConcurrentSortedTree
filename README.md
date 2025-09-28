@@ -68,6 +68,18 @@ The core of this project is a **handwritten Red-Black Tree** wrapped around **'C
 
 ---
 
+## 🧑‍💻 Wrapper Pattern Design
+
+The **Wrapper (Decorator) pattern** is central to the architecture of this project. The core Red-Black Tree is implemented as a non-thread-safe, high-performance sorted data structure, focusing solely on correctness and efficiency. To enable safe concurrent access, the `ConcurrentSortedTree` class acts as a wrapper around the Red-Black Tree, layering in concurrency control without modifying the underlying tree logic.
+
+This design allows separation of concerns:
+- The Red-Black Tree only handles data organization and sorting.
+- The wrapper (`ConcurrentSortedTree`) manages synchronization using a `ReentrantReadWriteLock` for thread safety.
+
+With this pattern, the concurrency logic is cleanly separated from the tree’s algorithm, promoting maintainability and extensibility. It also allows the core data structure to be reused in both concurrent and single-threaded contexts by choosing the appropriate wrapper.
+
+---
+
 ## ✨ Features
 
 - 🔒 **Thread-safe** concurrent access
