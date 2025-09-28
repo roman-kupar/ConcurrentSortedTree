@@ -10,6 +10,22 @@ This is my solution to JetBrains YouTrackDB development internship project. It f
 
 ---
 
+## 🎥 Demo Video
+
+Checkout my youtube video explaining the whole project in a nutschell:
+
+[![Demo Video](https://img.youtube.com/vi/7qZQMDii-ms/maxresdefault.jpg)](https://www.youtube.com/watch?v=7qZQMDii-ms)
+
+---
+
+## 🖼 UML Diagram
+
+Here is a UML diagram illustrating the core classes and their relationships in the project.
+
+![UML Diagram](UML.png)
+
+---
+
 ## 📖 Overview
 
 **ConcurrentSortedTree** is a Java-based, thread-safe, sorted in-memory tree.
@@ -26,14 +42,6 @@ This is my solution to JetBrains YouTrackDB development internship project. It f
 - ✅ **Optional REST Controller:** `DBserver.java` (Spring Boot) exposes a simple API for the database.
 - ✅ **JUnit tests:** Thorough correctness and concurrency validation.
 - ✅ **Benchmarks:** Performance measurement utilities.
-
----
-
-## 🖼 UML Diagram
-
-Here is a UML diagram illustrating the core classes and their relationships in the project.
-
-![UML Diagram](UML.png)
 
 ---
 
